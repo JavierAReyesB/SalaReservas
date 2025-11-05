@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(ngrok version:*)",
+      "Bash(lsof:*)",
+      "Bash(npm run dev:*)",
+      "Bash(node --version:*)",
+      "Bash(source ~/.nvm/nvm.sh)",
+      "Bash(nvm ls:*)",
+      "Bash(nvm install:*)",
+      "Bash(nvm use:*)",
+      "Bash(curl:*)",
+      "Bash(ngrok http:*)",
+      "Bash(lt --port 3000:*)",
+      "Bash(cloudflared tunnel:*)",
+      "Bash(/dev/null)",
+      "Bash(pkill:*)",
+      "Bash(xargs kill:*)",
+      "Bash(killall:*)",
+      "Bash(xargs:*)",
+      "Bash(awk:*)",
+      "Bash(fuser:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
