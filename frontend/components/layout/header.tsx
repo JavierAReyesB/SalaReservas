@@ -1,8 +1,9 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
-import { CalendarDaysIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
+import { Bars3Icon } from "@heroicons/react/24/outline"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 
@@ -16,13 +17,26 @@ export function Header() {
   ]
 
   return (
-    <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <CalendarDaysIcon className="h-6 w-6" />
-            <span className="text-xl font-semibold">Reserva de Salas</span>
+    <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-20">
+      <div className="container mx-auto px-4 h-full">
+        <div className="relative flex items-center justify-between h-full">
+          {/* Logo */}
+          <Link href="/" className="flex items-center h-full py-2">
+            <div className="relative h-full w-48">
+              <Image
+                src="/logoAvanzadi.png"
+                alt="Avanzadi Logo"
+                fill
+                className="object-contain object-left"
+                priority
+              />
+            </div>
           </Link>
+
+          {/* Centered Title */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
+            <h1 className="text-2xl font-bold">Reserva de Salas</h1>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">

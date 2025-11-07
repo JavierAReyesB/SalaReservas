@@ -1,0 +1,14 @@
+// Selecciona la base (puedes cambiar el nombre después)
+use("reservas");
+
+// Ver todas las bases de datos
+db.adminCommand({ listDatabases: 1 });
+
+// Listar colecciones de esta base
+db.getCollectionNames();
+
+// Mostrar todas las salas (rooms)
+db.rooms.find({}).sort({ _id: -1 }).limit(20);
+
+// Mostrar todas las reservaciones (reservations)
+db.reservations.find({}).sort({ _id: -1 }).limit(20);

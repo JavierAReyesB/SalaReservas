@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import { useAuth } from "@/contexts/auth-context"
+import { AdminLogin } from "@/components/admin-login"
 import { useReservas } from "@/hooks/use-reservations"
 import { ReservationsTable } from "@/components/reservations-table"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,14 +11,20 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { SALAS } from "@/lib/constants"
 import { Button } from "@/components/ui/button"
-import { XMarkIcon, FunnelIcon } from "@heroicons/react/24/outline"
+import { XMarkIcon, FunnelIcon, ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline"
 import { Skeleton } from "@/components/ui/skeleton"
 
 export default function ReservasPage() {
+  const { isAuthenticated, login, logout } = useAuth()
   const [selectedSala, setSelectedSala] = useState<string>("")
   const [selectedFecha, setSelectedFecha] = useState<string>("")
 
   const { data: reservas, isLoading, refetch } = useReservas(selectedSala || undefined, selectedFecha || undefined)
+
+  // Show login if not authenticated
+  if (!isAuthenticated) {
+    return <AdminLogin onLogin={login} />
+  }
 
   const clearFilters = () => {
     setSelectedSala("")
@@ -28,9 +36,15 @@ export default function ReservasPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Administrar reservas</h1>
-          <p className="text-muted-foreground">Visualiza y gestiona todas las reservas del sistema</p>
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">Administrar reservas</h1>
+            <p className="text-muted-foreground">Visualiza y gestiona todas las reservas del sistema</p>
+          </div>
+          <Button variant="outline" onClick={logout}>
+            <ArrowRightOnRectangleIcon className="mr-2 h-4 w-4" />
+            Cerrar sesión
+          </Button>
         </div>
 
         {/* Filters */}

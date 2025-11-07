@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { UsersIcon } from "@heroicons/react/24/outline"
 import type { Sala } from "@/lib/types"
@@ -14,13 +13,13 @@ export function RoomCard({ sala }: RoomCardProps) {
       {/* BACKGROUND IMAGE */}
       {sala.imagen && (
         <>
-          <Image
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-200 animate-pulse" />
+          <img
             src={sala.imagen}
             alt={sala.nombre}
-            fill
-            priority
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            fetchPriority="high"
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/40 to-black/40" />
         </>

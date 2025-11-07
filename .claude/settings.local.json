@@ -20,7 +20,20 @@
       "Bash(killall:*)",
       "Bash(xargs:*)",
       "Bash(awk:*)",
-      "Bash(fuser:*)"
+      "Bash(fuser:*)",
+      "Bash(bash:*)",
+      "Bash(chmod:*)",
+      "Bash(tree:*)",
+      "Bash(docker compose:*)",
+      "Bash(cmd.exe /c \"cd C:\\Users\\FCT3-Avanzadi\\Desktop\\salaQR\\frontend && del /F /Q package-lock.json && npm install\")",
+      "Bash(cmd.exe /c \"cd C:\\Users\\FCT3-Avanzadi\\Desktop\\salaQR\\frontend && rmdir /S /Q node_modules 2>nul && del /F /Q package-lock.json 2>nul && npm install\")",
+      "Bash(cmd.exe /c \"cd C:\\Users\\FCT3-Avanzadi\\Desktop\\salaQR\\backend && npm install\")",
+      "Bash(mongosh \"mongodb://osomoza:PJALEUfGAC3@154.58.194.94/?authSource=admin\" --eval \"show dbs\")",
+      "Bash(node inspect-mongo.js:*)",
+      "Bash(node ../inspect-mongo.js:*)",
+      "Bash(node check-reservas.js:*)",
+      "Bash(node ver-reservas.js:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": []

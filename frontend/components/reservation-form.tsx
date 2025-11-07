@@ -34,6 +34,24 @@ export function ReservationForm({ defaultRoom }: ReservationFormProps) {
     setIsMounted(true)
   }, [])
 
+  // Helper function to get current time rounded to next hour
+  const getCurrentTime = () => {
+    const now = new Date()
+    now.setMinutes(0)
+    now.setSeconds(0)
+    now.setMilliseconds(0)
+    return now.toTimeString().slice(0, 5) // Returns "HH:MM"
+  }
+
+  // Helper function to add hours to a time string
+  const addHours = (timeStr: string, hours: number) => {
+    const [h, m] = timeStr.split(':').map(Number)
+    const date = new Date()
+    date.setHours(h, m, 0, 0)
+    date.setHours(date.getHours() + hours)
+    return date.toTimeString().slice(0, 5)
+  }
+
   const {
     register,
     handleSubmit,
@@ -44,8 +62,15 @@ export function ReservationForm({ defaultRoom }: ReservationFormProps) {
     resolver: zodResolver(reservaSchema),
     defaultValues: {
       sala: defaultRoom,
+      horaInicio: getCurrentTime(),
+      horaFin: addHours(getCurrentTime(), 1),
     },
   })
+
+  const sala = watch("sala")
+  const fecha = watch("fecha")
+  const horaInicio = watch("horaInicio")
+  const horaFin = watch("horaFin")
 
   useEffect(() => {
     console.log("[v0] ReservationForm useEffect - defaultRoom:", defaultRoom)
@@ -56,10 +81,18 @@ export function ReservationForm({ defaultRoom }: ReservationFormProps) {
     }
   }, [defaultRoom, setValue])
 
-  const sala = watch("sala")
-  const fecha = watch("fecha")
-  const horaInicio = watch("horaInicio")
-  const horaFin = watch("horaFin")
+  // Auto-adjust end time when start time changes
+  useEffect(() => {
+    if (horaInicio) {
+      const currentHoraFin = horaFin
+      const suggestedHoraFin = addHours(horaInicio, 1)
+
+      // Only update if current end time is before or equal to start time
+      if (!currentHoraFin || currentHoraFin <= horaInicio) {
+        setValue("horaFin", suggestedHoraFin)
+      }
+    }
+  }, [horaInicio, horaFin, setValue])
 
   console.log("[v0] ReservationForm - watched sala value:", sala)
 
